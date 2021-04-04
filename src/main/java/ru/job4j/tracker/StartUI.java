@@ -10,6 +10,6 @@ public class StartUI {
         System.out.println(item.getCreated().format(timeFormatter));
         Tracker way = new Tracker();
         way.add(item);
-        System.out.println(way.findById(1).getName());
+        System.out.println(item);
     }
 }
