@@ -53,7 +53,7 @@ public class StartUI {
                 int id = Integer.valueOf(scanner.nextLine());
                 Item item = tracker.findById(id);
                 if (item != null) {
-                    System.out.println(item.toString());
+                    System.out.println(item);
                 } else {
                     System.out.println("Заявка с таким id не найдена");
                 }
@@ -65,7 +65,7 @@ public class StartUI {
                 Item[] array = tracker.findByName(name);
                 if (array.length > 0) {
                     for (int i = 0; i < array.length; i++) {
-                        System.out.println(array[i].toString());
+                        System.out.println(array[i]);
                     }
                 } else {
                     System.out.println("Заявки с таким именем не найдены");
