@@ -11,8 +11,8 @@ package ru.job4j.tracker;
         public static void showAllItems(Tracker tracker) {
             System.out.println("=== Show all items ====");
             Item[] array = tracker.findAll();
-            for (int i = 0; i < array.length; i++) {
-                System.out.println(array[i]);
+            for (Item item : array) {
+                System.out.println(item);
             }
         }
 
