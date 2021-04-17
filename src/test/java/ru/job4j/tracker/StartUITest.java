@@ -122,7 +122,7 @@ public class StartUITest {
 
         assertThat((out.toString()), is("Menu." + System.lineSeparator() + "0. Show all items"
                 +  System.lineSeparator() + "1. Exit" + System.lineSeparator() + "Show all items"
-                + System.lineSeparator() + item.toString() + System.lineSeparator() +
+                + System.lineSeparator() + item + System.lineSeparator() +
                 "Menu." + System.lineSeparator() + "0. Show all items"
                 +  System.lineSeparator() + "1. Exit" + System.lineSeparator()));
 
@@ -134,7 +134,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Replaced item"));
         Input in = new StubInput(
-                new String[] {"0", "1", "1"}
+                new String[] {"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = {
                 new FindByIdAction(out),
@@ -143,7 +143,7 @@ public class StartUITest {
         new StartUI(out).init(in, tracker, actions);
         assertThat((out.toString()), is("Menu." + System.lineSeparator() + "0. === Find item by Id ===="
                 +  System.lineSeparator() + "1. Exit" + System.lineSeparator() + "=== Find item by Id ===="
-                + System.lineSeparator() + item.toString() + System.lineSeparator() +
+                + System.lineSeparator() + item + System.lineSeparator() +
                 "Menu." + System.lineSeparator() + "0. === Find item by Id ===="
                 +  System.lineSeparator() + "1. Exit" + System.lineSeparator()));
     }
