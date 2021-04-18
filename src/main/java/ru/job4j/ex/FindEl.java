@@ -4,8 +4,8 @@ public class FindEl {
     public static int indexOf(String[] value, String key) throws ElementNotFoundException {
         int rsl = -1;
         int index = 0;
-        for (String s : value) {
-            if (s.equals(key)) {
+        for (int i = 0; i < value.length; i++) {
+            if (value[i].equals(key)) {
                 rsl = index;
                 break;
             }
