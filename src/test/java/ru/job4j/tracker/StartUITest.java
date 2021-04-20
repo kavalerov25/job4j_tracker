@@ -23,7 +23,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
-        String[] answers = { String.valueOf(item.getId()), /* id сохраненной заявки в объект tracker. */
+        String[] answers = {String.valueOf(item.getId()), /* id сохраненной заявки в объект tracker. */
                 "replaced item"
         };
         StartUI.editItem(new StubInput(answers), tracker);
@@ -45,7 +45,7 @@ public class StartUITest {
     public void whenCreateItem() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", "Item name", "1"}
+                new String[]{"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -63,7 +63,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("Replaced item")); /* Добавим в tracker новую заявку */
         String replacedName = "New item name";
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()),replacedName, "1"}
+                new String[]{"0", String.valueOf(item.getId()), replacedName, "1"}
         ); /* Входные данные должны содержать ID добавленной заявки item.getId() */
         UserAction[] actions = {
                 new ReplaceAction(out),
@@ -79,7 +79,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Deleted item"));  /* Добавим в tracker новую заявку */
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
+                new String[]{"0", String.valueOf(item.getId()), "1"}
         );/* Входные данные должны содержать ID добавленной заявки item.getId() */
         UserAction[] actions = {
                 new DeleteAction(out),
@@ -93,7 +93,7 @@ public class StartUITest {
     public void whenExit() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0"}
+                new String[]{"0"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -112,7 +112,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Replaced item"));
         Input in = new StubInput(
-                new String[] {"0","1"}
+                new String[]{"0", "1"}
         );
         UserAction[] actions = {
                 new FindAllAction(out),
@@ -121,10 +121,10 @@ public class StartUITest {
         new StartUI(out).init(in, tracker, actions);
 
         assertThat((out.toString()), is("Menu." + System.lineSeparator() + "0. Show all items"
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator() + "Show all items"
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator() + "Show all items"
                 + System.lineSeparator() + item + System.lineSeparator() +
                 "Menu." + System.lineSeparator() + "0. Show all items"
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator()));
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator()));
 
     }
 
@@ -134,7 +134,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("Replaced item"));
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
+                new String[]{"0", String.valueOf(item.getId()), "1"}
         );
         UserAction[] actions = {
                 new FindByIdAction(out),
@@ -142,10 +142,10 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         assertThat((out.toString()), is("Menu." + System.lineSeparator() + "0. === Find item by Id ===="
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator() + "=== Find item by Id ===="
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator() + "=== Find item by Id ===="
                 + System.lineSeparator() + item + System.lineSeparator() +
                 "Menu." + System.lineSeparator() + "0. === Find item by Id ===="
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator()));
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator()));
     }
 
     @Test
@@ -155,7 +155,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("New item name"));
         String name = "New item name";
         Input in = new StubInput(
-                new String[] {"0", name, "1"}
+                new String[]{"0", name, "1"}
         );
         UserAction[] actions = {
                 new FindByNameAction(out),
@@ -163,11 +163,33 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         assertThat((out.toString()), is("Menu." + System.lineSeparator() + "0. === Find items by name ==="
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator() +
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator() +
                 "=== Find items by name ===" + System.lineSeparator() +
                 item.toString() + System.lineSeparator() +
                 "Menu." + System.lineSeparator() + "0. === Find items by name ==="
-                +  System.lineSeparator() + "1. Exit" + System.lineSeparator()));
+                + System.lineSeparator() + "1. Exit" + System.lineSeparator()));
+    }
+
+    @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"8", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = new UserAction[]{
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + ln
+                        + "0. Exit" + ln
+                        + "Wrong input, you can select: 0 .. 0" + ln
+                        + "Menu." + ln
+                        + "0. Exit" + ln
+                )
+        );
     }
 }
 
