@@ -10,7 +10,7 @@ public class UniqueTextTest {
     @Test
     public void isEquals() {
         String origin = "My cat eats a mouse and milk";
-        String text = "My cat eats milk and a mouse";
+        String text = "My Cat eats milk and a mouse";
         assertThat(UniqueText.isEquals(origin, text), is(true));
     }
 
