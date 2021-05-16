@@ -9,10 +9,10 @@ public class UniqueText {
         String[] text = duplicateText.split(" ");
         HashSet<String> check = new HashSet<>();
         for (String word : origin) {
-            check.add(word.toUpperCase());
+            check.add(word.toLowerCase());
         }
         for (String duplicate :text) {
-            if (!check.contains(duplicate.toUpperCase())) {
+            if (!check.contains(duplicate.toLowerCase())) {
                 rsl = false;
                 break;
             }
