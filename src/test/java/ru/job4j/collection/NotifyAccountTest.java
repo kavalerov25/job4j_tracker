@@ -25,4 +25,24 @@ public class NotifyAccountTest {
         );
         assertThat(NotifyAccount.sent(accounts), is(expect));
     }
+
+    @Test
+    public void duplicate() {
+        List<Account> accounts = Arrays.asList(
+                new Account("123", "Petr Arsentev", "eDer3432f"),
+                new Account("142", "Petr Arsentev", "000002"),
+                new Account("142", "Petr Arsentev", "000011")
+        );
+        HashSet<Account> expect = new HashSet<>(
+                Arrays.asList(
+                        new Account("123", "Petr Arsentev", "eDer3432f"),
+                        new Account("142", "Petr Arsentev", "000011"),
+                        new Account("142", "Petr Arsentev", "000002")
+                )
+        );
+        assertThat(NotifyAccount.sent(accounts), is(expect));
+        System.out.println("HashSet: " + expect);
+        System.out.println("The size of the set is: " + expect.size());
+    }
 }
+
