@@ -31,13 +31,13 @@ public class NotifyAccountTest {
         List<Account> accounts = Arrays.asList(
                 new Account("123", "Petr Arsentev", "eDer3432f"),
                 new Account("142", "Petr Arsentev", "000002"),
-                new Account("142", "Petr Arsentev", "000011")
+                new Account("142", "Petr Arsentev", "000011"),
+                new Account("142", "Petr Arsentev", "000021")
         );
         HashSet<Account> expect = new HashSet<>(
                 Arrays.asList(
                         new Account("123", "Petr Arsentev", "eDer3432f"),
-                        new Account("142", "Petr Arsentev", "000011"),
-                        new Account("142", "Petr Arsentev", "000002")
+                        new Account("142", "Petr Arsentev", "000011")
                 )
         );
         assertThat(NotifyAccount.sent(accounts), is(expect));
