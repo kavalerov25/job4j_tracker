@@ -8,7 +8,10 @@ public class NotifyAccount {
         HashSet<Account> rsl = new HashSet<>();
         for (Account account : accounts) {
                 rsl.add(account);
+            System.out.println("HashSet: " + rsl);
+            System.out.println("The size of the set is: " + rsl.size());
         }
+
         return rsl;
     }
 }

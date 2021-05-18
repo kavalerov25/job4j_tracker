@@ -41,8 +41,6 @@ public class NotifyAccountTest {
                 )
         );
         assertThat(NotifyAccount.sent(accounts), is(expect));
-        System.out.println("HashSet: " + expect);
-        System.out.println("The size of the set is: " + expect.size());
     }
 }
 
