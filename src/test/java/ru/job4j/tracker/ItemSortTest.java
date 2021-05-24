@@ -2,40 +2,42 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ItemSortTest {
 
     @Test
-    public void whenSortIncreaseId() {
-        List<Item> listItem = new ArrayList<>();
-        listItem.add(new Item(5,"A"));
-        listItem.add(new Item(1,"V"));
-        listItem.add(new Item(0,"O"));
-        List<Item> listExpected = new ArrayList<>();
-        listExpected.add(new Item(0,"O"));
-        listExpected.add(new Item(1,"V"));
-        listExpected.add(new Item(5,"A"));
-        Collections.sort(listItem);
-        assertThat(listItem, is(listExpected));
+    public void whenSortByName() {
+        Item item1 = new Item("D");
+        Item item2 = new Item("C");
+        Item item3 = new Item("B");
+        Item item4 = new Item("A");
+        List<Item> input = Arrays.asList(item1, item2, item3, item4);
+        input.sort(new ItemSortByName());
+        assertEquals(input.get(0).getName(), "A");
+        assertEquals(input.get(1).getName(), "B");
+        assertEquals(input.get(2).getName(), "C");
+        assertEquals(input.get(3).getName(), "D");
+
     }
 
     @Test
-    public void whenSortDecreaseId() {
-        List<Item> listItem = new ArrayList<>();
-        listItem.add(new Item(5,"A"));
-        listItem.add(new Item(1,"V"));
-        listItem.add(new Item(0,"O"));
-        List<Item> listExpected = new ArrayList<>();
-        listExpected.add(new Item(5,"A"));
-        listExpected.add(new Item(1,"V"));
-        listExpected.add(new Item(0,"O"));
-        Collections.sort(listItem, Collections.reverseOrder());
-        assertThat(listItem, is(listExpected));
+    public void whenSortByNameRes() {
+        Item item1 = new Item("D");
+        Item item2 = new Item("C");
+        Item item3 = new Item("B");
+        Item item4 = new Item("A");
+        Item item5 = new Item("E");
+        List<Item> input = Arrays.asList(item1, item2, item3, item4, item5);
+        input.sort(new ItemSortByNameReservsOrder());
+        assertEquals(input.get(0).getName(), "E");
+        assertEquals(input.get(1).getName(), "D");
+        assertEquals(input.get(2).getName(), "C");
+        assertEquals(input.get(3).getName(), "B");
+        assertEquals(input.get(4).getName(), "A");
     }
 }
