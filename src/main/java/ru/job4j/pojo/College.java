@@ -8,6 +8,7 @@ public class College {
         kirill.setFullName("kirill kavalerov");
         kirill.setGroup("1271");
         kirill.setData(LocalDateTime.now());
-        System.out.println(kirill.getFullName() + " learn in " + kirill.getGroup() + " begins " + kirill.getData());
+        System.out.println(kirill.getFullName() + " learn in " + kirill.getGroup()
+                           + " begins " + kirill.getData());
     }
 }

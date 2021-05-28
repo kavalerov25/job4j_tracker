@@ -33,8 +33,7 @@ public class ValidateInputTest {
     public void whenMultipleCorrectInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1","2","4"}
-        );
+                new String[] {"1", "2", "4"});
         ValidateInput input = new ValidateInput(out, in);
         int selected =  0;
         for (int i = 0; i < 3; i++) {
@@ -47,8 +46,7 @@ public class ValidateInputTest {
     public void whenNegativeNumberInput() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"1","2","-4"}
-        );
+                new String[] {"1", "2", "-4"});
         ValidateInput input = new ValidateInput(out, in);
         int selected =  0;
         for (int i = 0; i < 3; i++) {
