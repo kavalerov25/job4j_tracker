@@ -44,7 +44,7 @@ public class ItemSortTest {
                 new Item("B"),
                 new Item("A")
         );
-        input.sort(new ItemSortByNameReservsOrder());
+        input.sort(new ItemSortByNameResOrder());
         assertThat(input, is(expect));
     }
 }
