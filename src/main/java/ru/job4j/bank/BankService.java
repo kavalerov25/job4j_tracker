@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Класс описывает действия с объектами User и Account.
- * Класс имеет поле Map<User, List<Account>> users, которое хранит
+ * Класс имеет поле users, которое хранит
  * в себе данные о пользователях(User) и их счетах(Account).
  *
  * @author kirill kavalerov
