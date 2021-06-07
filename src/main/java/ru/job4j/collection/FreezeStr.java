@@ -17,6 +17,9 @@ public class FreezeStr {
             }
         }
         for (Character chr : right.toCharArray()) {
+            if (!mapLeft.containsKey(chr)) {
+                return false;
+            }
             if (mapLeft.containsKey(chr)) {
                 int value = mapLeft.get(chr) - 1;
                 mapLeft.put(chr, value);
