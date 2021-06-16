@@ -12,9 +12,11 @@ public class FI {
         };
 
         Comparator<Attachment> comparator = (left, right) -> left.getSize() - right.getSize();
-        Comparator<String> cmpSize = (left, right) -> left.length() - right.length();
+        Comparator<String> cmpSize = (left, right) ->
+                Integer.compare(left.length(), right.length());
         Comparator<String> cmpText = (left, right) -> left.compareTo(right);
-        Comparator<String> cmpDescSize = (left, right) -> right.length() - left.length();
+        Comparator<String> cmpDescSize = (left, right) ->
+                Integer.compare(right.length(), left.length());
         Arrays.sort(atts, comparator);
         for (Attachment a : atts) {
             System.out.println(a);
