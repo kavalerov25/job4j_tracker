@@ -21,4 +21,21 @@ public class ProfilesTest {
         List<Address> rsl = pro.collect(profiles);
         Assert.assertEquals(rsl, expected);
     }
+
+    @Test
+    public void whenCollectWithDuplicates() {
+        Profiles pro = new Profiles();
+        List<Profile> profiles = List.of(
+                new Profile(new Address("Moscow", "Barmalei", 8, 88)),
+                new Profile(new Address("Moscow", "Barmalei", 8, 88)),
+                new Profile(new Address("SPB", "Borovay", 35, 13)),
+                new Profile(new Address("SPB", "Borovay", 35, 13))
+        );
+        List<Address> expected = List.of(
+                new Address("Moscow", "Barmalei", 8, 88),
+                new Address("SPB", "Borovay", 35, 13)
+        );
+        List<Address> rsl = pro.collect(profiles);
+        Assert.assertEquals(rsl, expected);
+    }
 }

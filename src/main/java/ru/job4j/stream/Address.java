@@ -47,4 +47,12 @@ public class Address {
                + ", apartment=" + apartment
                + '}';
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }
