@@ -14,7 +14,6 @@ public class LazyLoad {
         };
         Arrays.sort(names, lengthCmp);
 
-
         String[] namesTwo = {
                 "Ivan",
                 "Petr"
