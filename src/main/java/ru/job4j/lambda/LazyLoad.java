@@ -5,6 +5,7 @@ import java.util.Comparator;
 
 public class LazyLoad {
     public static void main(String[] args) {
+        // Лямбда не вычисляется
         String[] names = {
                 "Ivan",
         };

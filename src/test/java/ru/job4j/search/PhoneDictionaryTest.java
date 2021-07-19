@@ -2,6 +2,8 @@ package ru.job4j.search;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -22,7 +24,7 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Stas", "Korobeinikov", "123456", "Moscow")
         );
-        var persons = phones.find("Petr");
+        ArrayList persons = phones.find("Petr");
         assertThat(persons.size(), is(0));
     }
 }
