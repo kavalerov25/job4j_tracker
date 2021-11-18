@@ -29,8 +29,6 @@ public class Item {
         this.created = created;
     }
 
-
-
     public int getId() {
         return id;
     }
