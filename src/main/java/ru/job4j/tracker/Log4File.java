@@ -22,6 +22,6 @@ public final class Log4File {
     }
 
     public void save() {
-        //TODO Сохраняем записи из массива messages в файл.
+
     }
 }
