@@ -84,23 +84,8 @@ public class SqlTracker implements Store {
 
     @Override
     public List<Item> findAll() {
-        return find("select * from items;");
-    }
-
-    @Override
-    public List<Item> findByName(String key) {
-        return find(String.format("select * from items where name = '%s';", key));
-    }
-
-    @Override
-    public Item findById(int id) {
-        List<Item> items = find(String.format("select * from items where id = %s", id));
-        return items.size() != 0 ? items.get(0) : null;
-    }
-
-    private List<Item> find(String string) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement(string)) {
+        try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     items.add(new Item(
@@ -115,4 +100,44 @@ public class SqlTracker implements Store {
         }
         return items;
     }
+
+    @Override
+    public List<Item> findByName(String key) {
+        List<Item> items = new ArrayList<>();
+        try (PreparedStatement statement = cn.
+                prepareStatement("select * from items where name like ?")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    items.add(new Item(
+                            resultSet.getString("name"),
+                            resultSet.getInt("id"),
+                            resultSet.getTimestamp("created").toLocalDateTime()
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
+    @Override
+    public Item findById(int id) {
+        Item items = null;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("select * from items where id = ?")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    items = new Item(
+                            resultSet.getString("name"),
+                            resultSet.getInt("id"),
+                            resultSet.getTimestamp("created").toLocalDateTime());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
 }
