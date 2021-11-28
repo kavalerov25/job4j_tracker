@@ -102,8 +102,8 @@ public class SqlTracker implements Store {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement = cn.
                 prepareStatement("select * from items where name like ? order by id")) {
+            statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
-                statement.setString(1, key);
                 while (resultSet.next()) {
                     items.add(getItem(resultSet));
                 }
