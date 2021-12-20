@@ -126,7 +126,7 @@ public class SqlTracker implements Store {
     public Item findById(int id) {
         Item items = null;
         try (PreparedStatement statement =
-                     cn.prepareStatement("select * from items where id = ? ")) {
+                     cn.prepareStatement("select * from items where id = ?")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {

@@ -5,7 +5,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,12 +17,12 @@ import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
 
-    private static Connection connection;
+    static private Connection connection;
 
     @BeforeClass
     public static void initConnection() {
-        try (InputStream in = SqlTrackerTest.class.getClassLoader().
-                getResourceAsStream("test.properties")) {
+        try (InputStream in = SqlTrackerTest.class.getClassLoader()
+                .getResourceAsStream("test.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -57,4 +56,5 @@ public class SqlTrackerTest {
         tracker.add(item);
         assertThat(tracker.findById(item.getId()), is(item));
     }
+
 }
