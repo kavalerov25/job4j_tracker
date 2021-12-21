@@ -10,14 +10,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class SqlTrackerTest {
 
-    static private Connection connection;
+    private static Connection connection;
 
     @BeforeClass
     public static void initConnection() {
@@ -57,4 +59,50 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
+    @Test
+    public void whenSaveItemAndFindByName() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        List<Item> items = new ArrayList<>();
+        items.add(item);
+        tracker.add(item);
+        assertEquals(tracker.findByName(item.getName()), items);
+    }
+
+    @Test
+    public void whenSaveItemsAndFindAll() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item firstItem = new Item("first");
+        Item secondItem = new Item("second");
+        Item thirdItem = new Item("third");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        List<Item> items = new ArrayList<>();
+        items.add(firstItem);
+        items.add(secondItem);
+        items.add(thirdItem);
+        assertEquals(tracker.findAll(), items);
+    }
+
+    @Test
+    public void whenSaveItemAndReplace() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        Item newItem = new Item("new");
+        tracker.add(item);
+        int id = item.getId();
+        tracker.replace(item.getId(), newItem);
+        assertThat(tracker.findById(id).getName(), is(newItem.getName()));
+    }
+
+    @Test
+    public void whenSaveItemAndDelete() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = new Item("item");
+        tracker.add(item);
+        int id = item.getId();
+        tracker.delete(id);
+        assertNull(tracker.findById(id));
+    }
 }
