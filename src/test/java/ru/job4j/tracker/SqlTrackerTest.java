@@ -10,12 +10,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 public class SqlTrackerTest {
 
@@ -68,7 +68,7 @@ public class SqlTrackerTest {
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);
-        assertThat(tracker.findByName("first"),is(List.of(firstItem)));
+        assertThat(tracker.findByName("first"), is(List.of(firstItem)));
     }
 
     @Test
