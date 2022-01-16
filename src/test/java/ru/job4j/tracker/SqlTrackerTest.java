@@ -62,11 +62,13 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByName() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        List<Item> items = new ArrayList<>();
-        items.add(item);
-        tracker.add(item);
-        assertEquals(tracker.findByName(item.getName()), items);
+        Item firstItem = new Item("first");
+        Item secondItem = new Item("second");
+        Item thirdItem = new Item("third");
+        tracker.add(firstItem);
+        tracker.add(secondItem);
+        tracker.add(thirdItem);
+        assertThat(tracker.findByName("first"),is(List.of(firstItem)));
     }
 
     @Test
@@ -78,11 +80,7 @@ public class SqlTrackerTest {
         tracker.add(firstItem);
         tracker.add(secondItem);
         tracker.add(thirdItem);
-        List<Item> items = new ArrayList<>();
-        items.add(firstItem);
-        items.add(secondItem);
-        items.add(thirdItem);
-        assertEquals(tracker.findAll(), items);
+        assertThat(tracker.findAll(), is(List.of(firstItem, secondItem, thirdItem)));
     }
 
     @Test
