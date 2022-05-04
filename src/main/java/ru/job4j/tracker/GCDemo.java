@@ -23,7 +23,7 @@ public class GCDemo {
             memTracker.add(new Item("item" + i));
         }
         double finish = System.currentTimeMillis();
-        System.out.printf("%nApp running time: %f%n%n", (finish - start ) / 1000);
+        System.out.printf("%nApp running time: %f%n%n", (finish - start) / 1000);
         info();
     }
 }
