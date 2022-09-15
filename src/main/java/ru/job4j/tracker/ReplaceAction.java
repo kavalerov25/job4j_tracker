@@ -20,9 +20,9 @@ public class ReplaceAction implements UserAction {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
         if (tracker.replace(id, item)) {
-            out.println("Item edit success");
+            out.println("Edit item is done.");
         } else {
-            out.println("System error");
+            out.println("Item with id=0 not found.");
         }
         return true;
     }
