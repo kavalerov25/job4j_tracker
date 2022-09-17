@@ -21,11 +21,12 @@ public class ReplaceActionTest {
 /**
  * when(input.askInt(any(String.class))).thenReturn(1);
  * when(input.askStr(any(String.class))).thenReturn(replacedName);
- * Проблем при выполнении не возникло. Если мы уберем строки настройки нашей заглушки (использование метода when()), изменим немного сравниваемые значения в assertThat():
+ * Проблем при выполнении не возникло.
+ * Если мы уберем строки настройки нашей заглушки (использование метода when()),
+ * изменим немного сравниваемые значения в assertThat():
  */
 
         rep.execute(input, tracker);
-
         String ln = System.lineSeparator();
         /**
          *  assertThat(out.toString(), is("=== Edit item ===" + ln + "Edit item is done." + ln));
