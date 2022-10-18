@@ -1,16 +1,21 @@
 package ru.job4j.tracker;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 @Entity
 @Table(name = "items")
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@EqualsAndHashCode(exclude = "created")
 public class Item {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -20,9 +25,6 @@ public class Item {
     private int id;
     private String name;
     private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS);
-
-    public Item() {
-    }
 
     public Item(String name) {
         this.name = name;
@@ -51,22 +53,5 @@ public class Item {
                + "id=" + id
                + ", name='" + name + '\''
                + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Item)) {
-            return false;
-        }
-        Item item = (Item) o;
-        return getId() == item.getId() && Objects.equals(getName(), item.getName()) && Objects.equals(getCreated(), item.getCreated());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getCreated());
     }
 }
