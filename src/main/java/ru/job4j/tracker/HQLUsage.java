@@ -14,7 +14,8 @@ public class HQLUsage {
         StandardServiceRegistry registry =
                 new StandardServiceRegistryBuilder()
                         .configure().build();
-        try (SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory()) {
+        try (SessionFactory sf = new MetadataSources(registry).
+                buildMetadata().buildSessionFactory()) {
             Session session = sf.openSession();
             insert(session, "anotherItem");
             delete(session, 1);
