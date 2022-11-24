@@ -7,7 +7,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Objects;
+import ru.job4j.toone.User;
 
 @Entity
 @NoArgsConstructor
@@ -22,6 +24,13 @@ public class Item {
     private int id;
     private String name;
     private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS);
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = {@JoinColumn(name = "item_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private List<User> participates;
 
     public Item(String name) {
         this.name = name;
@@ -41,6 +50,21 @@ public class Item {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Item(int id, String name, LocalDateTime created, List<User> participates) {
+        this.id = id;
+        this.name = name;
+        this.created = created;
+        this.participates = participates;
+    }
+
+    public List<User> getParticipates() {
+        return participates;
+    }
+
+    public void setParticipates(List<User> participates) {
+        this.participates = participates;
     }
 
     @Override
