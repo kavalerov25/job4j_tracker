@@ -17,7 +17,10 @@ public class HbmTracker implements Store, AutoCloseable {
 
     @Override
     public void init() {
+    }
 
+    public SessionFactory getSf() {
+        return sf;
     }
 
     @Override

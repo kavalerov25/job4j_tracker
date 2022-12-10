@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,10 +10,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
+
 import ru.job4j.toone.User;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "items")
 @Data
 public class Item {
@@ -32,6 +35,12 @@ public class Item {
     )
     private List<User> participates;
 
+    public Item(int id, String name, LocalDateTime created) {
+        this.id = id;
+        this.name = name;
+        this.created = created;
+    }
+
     public Item(String name) {
         this.name = name;
     }
@@ -50,13 +59,6 @@ public class Item {
     public Item(int id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Item(int id, String name, LocalDateTime created, List<User> participates) {
-        this.id = id;
-        this.name = name;
-        this.created = created;
-        this.participates = participates;
     }
 
     public List<User> getParticipates() {
